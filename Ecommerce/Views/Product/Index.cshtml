@@ -7,10 +7,28 @@
 
 <script>
     $(document).ready(function () { 
-        $.get("demo_test.asp", function (data, status) {
-            alert("Data: " + data + "\nStatus: " + status);
+        var productContent = '';
+        $.get("http://localhost:58345/ProductAPI/ProductList", function (data, status) {
+                $.each(data, function (index, value) { 
+                   
+                    productContent = productContent+`
+                        <div>
+                                <p>${value.name}</p>
+                                 <p>${value.price}</p>
+                                 <p>${value.quantity}</p>
+                                 <img src='${value.picture}'/>
+
+                        </div>
+                    `;
+                })
+            $('#dbProductList').html(productContent);
         });
     })
     
 </script>
+
+
+<div id="dbProductList">
+
+</div>
 
