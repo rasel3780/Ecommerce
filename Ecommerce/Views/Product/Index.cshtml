@@ -1,34 +1,95 @@
-﻿
-@{
+﻿@{
     ViewData["Title"] = "Index";
 }
-<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous">
-</script>
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+<style>
+    .card {
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.3s;
+    }
+
+        .card:hover {
+            box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+        }
+
+    .card-img-top {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 20px;
+        text-align: center; /* Center text within card body */
+    }
+
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .card-text {
+        margin-bottom: 5px;
+    }
+
+    .btn {
+        margin-top: 10px;
+    }
+
+        .btn .fas {
+            margin-right: 5px;
+        }
+</style>
+
+<script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
 <script>
-    $(document).ready(function () { 
+    $(document).ready(function () {
         var productContent = '';
-        $.get("http://localhost:58345/ProductAPI/ProductList", function (data, status) {
-                $.each(data, function (index, value) { 
-                   
-                    productContent = productContent+`
-                        <div>
-                                <p>${value.name}</p>
-                                 <p>${value.price}</p>
-                                 <p>${value.quantity}</p>
-                                 <img src='${value.picture}'/>
 
+        $.get("http://localhost:58345/ProductAPI/ProductList", function (data, status) {
+            $.each(data, function (index, value) {
+                productContent += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <img src="${value.picture}" class="card-img-top" alt="${value.name}">
+                            <div class="card-body text-center">
+                                <h5 class="card-title">${value.name}</h5>
+                                <p class="card-text">Price: ${value.price}</p>
+                                <button class="btn btn-primary">
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </button>
+                            </div>
                         </div>
-                    `;
-                })
-            $('#dbProductList').html(productContent);
+                    </div>
+                `;
+            });
+
+            $('#productContainer').html(productContent);
         });
-    })
-    
+    });
 </script>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
 
-<div id="dbProductList">
+<div class="container">
+    <div class="row" id="productContainer">
+        <!-- Product cards will be inserted here -->
+    </div>
+</div>
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+
+
+<div class="container">
+    <div class="row" id="productContainer">
+        <!-- Product cards will be inserted here -->
+    </div>
 </div>
 
