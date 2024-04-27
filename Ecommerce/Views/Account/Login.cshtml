@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h1>Login</h1>
+
+<script src="~/js/controller/accountcontroller.js"></script>
+<script src="~/js/service/accountservice.js"></script>
+
+<div class="content">
+    <div class="row">
+        <label>Enter Username</label>
+        <input type="text" name="txtUserName" />
+    </div>
+
+    <div class="row">
+        <label>Enter Password</label>
+        <input type="text" name="txtPassword" />
+
+    </div>
+    
+    <div class="row mt-3">
+        <input type="submit" id="btnLogin" value="Login" name="btnSubmit" style="width:100%" onclick="javascript:AccountController.VerifyUser(this)" />
+    </div>
+
+</div>
