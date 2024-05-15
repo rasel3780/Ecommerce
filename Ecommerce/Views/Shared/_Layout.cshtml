@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ecommerce.styles.css" asp-append-version="true" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -37,8 +42,14 @@
                         </li>
                     </ul>
                 </div>
-                <div style="float:right; width:200px">
-                    <span id="lblUser">User Name:</span>
+                <div style="float:right; width:500px">
+                    <div style="width:10px; height:10px; display:inline-flex; padding:0px 7px; position:relative;">
+                        <i class="fa fa-cart-shopping"></i><span id="lblCartCnt" style="padding:2px 5px; color:white; background:maroon; font-size:10px; position:absolute; right:-11px; top:-10px;">0</span>
+                    </div>
+                    <div style="width:10px; height:10px; display:inline-flex; padding:0px 5px;">
+                        <i class="fa fa-user"></i> <span id="lblUser">User Name:</span>
+                    </div>
+                   
                 </div>
             </div>
         </nav>
