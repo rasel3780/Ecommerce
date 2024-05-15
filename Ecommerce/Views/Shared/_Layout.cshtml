@@ -11,8 +11,8 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         $(document).ready(function () {
-            if (localStorage.getItem("UserName")!=undefined && localStorage.getItem("UserName")!=null){
-                var userName = localocalStorage.getItem("UserName");
+            if (localStorage.getItem("userName") != undefined && localStorage.getItem("userName") != null) {
+                var userName = localStorage.getItem("userName");
                 $('#lblUser').html(userName);
             }
         })

@@ -5,7 +5,6 @@ namespace Ecommerce.Controllers
 {
     public class AccountAPIController : Controller
     {
-        //http://localhost:58345/AccountAPI/VerifyUser?userName=Rasel&password=123456
         [HttpPost]
         public IActionResult VerifyUser(Account ModelAccount)
         {
