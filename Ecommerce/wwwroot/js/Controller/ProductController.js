@@ -63,13 +63,13 @@ var ProductController = {
     ViewCart: () => {
 
         /*  $("#dvViewCarts").css("right", parseInt($("#dvViewCarts").css("right").replace('px',''))-20);*/
-        if ($("#dvViewCarts").css('right') == "0" || $("#dvViewCarts").css('right') == "0px") {
-            $("#dvViewCarts").animate({
+        if ($("#dvViewCartsWrapper").css('right') == "0" || $("#dvViewCartsWrapper").css('right') == "0px") {
+            $("#dvViewCartsWrapper").animate({
                 right: "-300"
             }, "fast");
         }
         else {
-            $("#dvViewCarts").animate({
+            $("#dvViewCartsWrapper").animate({
                 right: "0"
             }, "fast");
         }
@@ -105,6 +105,16 @@ var ProductController = {
             })
         }
        
+    },
+
+    PrepareCartForCheckoutUI: (url) => {
+        if (LstCartProducts.length > 0) {
+            localStorage.setItem("LstCartProducts", JSON.stringify(LstCartProducts));
+            window.location.href = url;
+        }
+        else {
+            alert('Cart Empty');
+        }
     }
 
 }
