@@ -54,6 +54,7 @@ var ProductController = {
                 LstCartProducts_upd.push(value)
             }
         })
+       
         LstCartProducts = LstCartProducts_upd;
         ProductController.ArrangeProductsForCart();
         alert("Cart updated");
@@ -75,12 +76,13 @@ var ProductController = {
     },
 
     ArrangeProductsForCart: () => {
+        $('#lblCartCnt').html("0");
+        $("#dvViewCarts").html('');
         if (LstCartProducts.length > 0) {
             //cart count update
-            $('#lblCartCnt').html(LstCartProducts.length); 
+            $('#lblCartCnt').html(LstCartProducts.length);
 
-            //view cart update
-            $("#dvViewCarts").html('');
+       
             $.each(LstCartProducts, function (index, value) {
                 $("#dvViewCarts").append(`
                     <div id='dvCartWrapper_${index}' style="clear:both; display:black; border:1px solid #eee; height:100px; width:100%;">
@@ -102,6 +104,7 @@ var ProductController = {
                 `);
             })
         }
+       
     }
 
 }
