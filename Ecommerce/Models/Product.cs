@@ -5,11 +5,11 @@ namespace Ecommerce.Models
     public class Product
     {
         [DataMember]
-        public string Name { get; set; }
+        public string title { get; set; }
         [DataMember]
-        public string Picture { get; set; }
+        public string thumbnail { get; set; }
         [DataMember]
-        public double Price { get; set; }
+        public double price { get; set; }
         [DataMember]
         public int Quantity { get; set; }
     }
