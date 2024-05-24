@@ -46,6 +46,19 @@ var ProductController = {
 
     },
 
+    DeleteFromCart: (targetProductID, targetIndex) => {
+        debugger;
+        let LstCartProducts_upd = [];
+        $.each(LstCartProducts, function (index, value) {
+            if (targetIndex != index) {
+                LstCartProducts_upd.push(value)
+            }
+        })
+        LstCartProducts = LstCartProducts_upd;
+        ProductController.ArrangeProductsForCart();
+        alert("Cart updated");
+    },
+
     ViewCart: () => {
 
         /*  $("#dvViewCarts").css("right", parseInt($("#dvViewCarts").css("right").replace('px',''))-20);*/
@@ -59,12 +72,8 @@ var ProductController = {
                 right: "0"
             }, "fast");
         }
-        //if (LstCartProducts.length > 0) {
-        //    $.each(LstCartProducts, function (index, value) {
-
-        //    })
-        //}
     },
+
     ArrangeProductsForCart: () => {
         if (LstCartProducts.length > 0) {
             //cart count update
@@ -74,23 +83,23 @@ var ProductController = {
             $("#dvViewCarts").html('');
             $.each(LstCartProducts, function (index, value) {
                 $("#dvViewCarts").append(`
-                    <div style="clear:both; display:black; border:1px solid #eee; height:100px; width:100%;">
-        <div class="row" style="padding:5px;">
-            <div class="col col-sm-3">
-                <img src="${value.Image}" style="width: 100px; " />
-            </div>
-            <div class="col col-sm-3">
-                <span>${value.Name}</span>
-            </div>
-            <div class="col col-sm-3">
-                <span>${value.Price}</span>
-            </div>
-            <div class="col col-sm-3">
-                <span>x</span>
-            </div>
-        </div>
-    </div>
-    `);
+                    <div id='dvCartWrapper_${index}' style="clear:both; display:black; border:1px solid #eee; height:100px; width:100%;">
+                        <div class="row" style="padding:5px;">
+                            <div class="col col-sm-3">
+                                <img src="${value.Image}" style="width: 100px; " />
+                            </div>
+                            <div class="col col-sm-3">
+                                <span>${value.Name}</span>
+                            </div>
+                            <div class="col col-sm-3">
+                                <span>${value.Price}</span>
+                            </div>
+                            <div class="col col-sm-3">
+                                <span id='delCartProduct_${index}' style="padding:3px; background:red;color:white; cursor:pointer" onclick="javascript:ProductController.DeleteFromCart('dvCartWrapper_${index}', ${index})">x</span>
+                            </div>
+                        </div>
+                     </div>
+                `);
             })
         }
     }
