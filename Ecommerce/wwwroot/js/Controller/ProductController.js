@@ -28,37 +28,83 @@ var ProductController = {
     },
 
     AddToCart: (cntrl) => {
-       
-       /* var LstCartProducts = [];*/
-
-        //if (localStorage.getItem("LstCartProducts") != undefined && localStorage.getItem("LstCartProducts") != null) {
-        //    LstCartProducts = localStorage.getItem("LstCartProducts");
-        //}
-
-        //console.log("----Existing Product-----");
-        //console.log(LstCartProducts);
         var targetIndex = $(cntrl).attr("id").split('_')[1];
         var targetImage = $('#pdPicture_' + targetIndex).attr('src');
         var targetName = $('#pdName_' + targetIndex).html();
         var targetPrice = $('#pdPrice_' + targetIndex).html();
 
-        $('#lblCartCnt').html(parseInt($('#lblCartCnt').html()) + 1);
-
+        
         var targetProduct = {
             Image: targetImage,
             Name: targetName,
             Price: targetPrice
         }
+        LstCartProducts.push(targetProduct);
 
-        //var LstCartProductsNew = [];
-
-        LstCartProductsNew.push(targetProduct);
-        //localStorage.setItem("LstCartProducts", LstCartProductsNew);
-
-        //console.log("----After adding Product-----");
-        //console.log(LstCartProductsNew);
-
+        ProductController.ArrangeProductsForCart();
         alert("Porduct Added");
 
+    },
+
+    DeleteFromCart: (targetProductID, targetIndex) => {
+        debugger;
+        let LstCartProducts_upd = [];
+        $.each(LstCartProducts, function (index, value) {
+            if (targetIndex != index) {
+                LstCartProducts_upd.push(value)
+            }
+        })
+       
+        LstCartProducts = LstCartProducts_upd;
+        ProductController.ArrangeProductsForCart();
+        alert("Cart updated");
+    },
+
+    ViewCart: () => {
+
+        /*  $("#dvViewCarts").css("right", parseInt($("#dvViewCarts").css("right").replace('px',''))-20);*/
+        if ($("#dvViewCarts").css('right') == "0" || $("#dvViewCarts").css('right') == "0px") {
+            $("#dvViewCarts").animate({
+                right: "-300"
+            }, "fast");
+        }
+        else {
+            $("#dvViewCarts").animate({
+                right: "0"
+            }, "fast");
+        }
+    },
+
+    ArrangeProductsForCart: () => {
+        $('#lblCartCnt').html("0");
+        $("#dvViewCarts").html('');
+        if (LstCartProducts.length > 0) {
+            //cart count update
+            $('#lblCartCnt').html(LstCartProducts.length);
+
+       
+            $.each(LstCartProducts, function (index, value) {
+                $("#dvViewCarts").append(`
+                    <div id='dvCartWrapper_${index}' style="clear:both; display:black; border:1px solid #eee; height:100px; width:100%;">
+                        <div class="row" style="padding:5px;">
+                            <div class="col col-sm-3">
+                                <img src="${value.Image}" style="width: 100px; " />
+                            </div>
+                            <div class="col col-sm-3">
+                                <span>${value.Name}</span>
+                            </div>
+                            <div class="col col-sm-3">
+                                <span>${value.Price}</span>
+                            </div>
+                            <div class="col col-sm-3">
+                                <span id='delCartProduct_${index}' style="padding:3px; background:red;color:white; cursor:pointer" onclick="javascript:ProductController.DeleteFromCart('dvCartWrapper_${index}', ${index})">x</span>
+                            </div>
+                        </div>
+                     </div>
+                `);
+            })
+        }
+       
     }
+
 }

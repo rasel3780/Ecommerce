@@ -43,9 +43,12 @@
                     </ul>
                 </div>
                 <div style="float:right; width:500px">
-                    <div style="width:10px; height:10px; display:inline-flex; padding:0px 7px; position:relative;">
+                    <!--Cart-->
+                    <div onclick="ProductController.ViewCart()" style="cursor:pointer;width:10px; height:10px; display:inline-flex; padding:0px 7px; position:relative;">
                         <i class="fa fa-cart-shopping"></i><span id="lblCartCnt" style="padding:2px 5px; color:white; background:maroon; font-size:10px; position:absolute; right:-11px; top:-10px;">0</span>
                     </div>
+
+                    <!--User-->
                     <div style="width:10px; height:10px; display:inline-flex; padding:0px 5px;">
                         <i class="fa fa-user"></i> <span id="lblUser">User Name:</span>
                     </div>
