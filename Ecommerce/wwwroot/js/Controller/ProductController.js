@@ -46,7 +46,7 @@ var ProductController = {
 
     },
 
-    DeleteFromCart: (targetProductID, targetIndex) => {
+    DeleteFromCart: (targetIndex) => {
         debugger;
         let LstCartProducts_upd = [];
         $.each(LstCartProducts, function (index, value) {
@@ -78,6 +78,10 @@ var ProductController = {
     ArrangeProductsForCart: () => {
         $('#lblCartCnt').html("0");
         $("#dvViewCarts").html('');
+        if ($('body').find('#dvDetailsCartsProduct').length > 0) {
+            $("#dvDetailsCartsProduct").html('');
+        }
+
         if (LstCartProducts.length > 0) {
             //cart count update
             $('#lblCartCnt').html(LstCartProducts.length);
@@ -97,12 +101,38 @@ var ProductController = {
                                 <span>${value.Price}</span>
                             </div>
                             <div class="col col-sm-3">
-                                <span id='delCartProduct_${index}' style="padding:3px; background:red;color:white; cursor:pointer" onclick="javascript:ProductController.DeleteFromCart('dvCartWrapper_${index}', ${index})">x</span>
+                                <span id='delCartProduct_${index}' style="padding:3px; background:red;color:white; cursor:pointer" onclick="javascript:ProductController.DeleteFromCart(${index})">x</span>
                             </div>
                         </div>
                      </div>
                 `);
             })
+
+            //Checkout details update
+            if ($('body').find('#dvDetailsCartsProduct').length > 0) {
+                $.each(LstCartProducts, function (index, value) {
+                    $("#dvDetailsCartsProduct").append(`
+                 <div id='dvCheckOutCartWrapper_${index}' style="clear:both; display:black; border:1px solid #eee; height:100px; width:100%;">
+                     <div class="row" style="padding:5px;">
+                         <div class="col col-sm-3">
+                             <img src="${value.Image}" style="width: 100px; " />
+                         </div>
+                         <div class="col col-sm-3">
+                             <span>${value.Name}</span>
+                         </div>
+                         <div class="col col-sm-3">
+                             <span>${value.Price}</span>
+                         </div>
+                         <div class="col col-sm-3">
+                             <span id='delCheckOutProduct_${index}' style="padding:3px; background:red;color:white; cursor:pointer" onclick="javascript:ProductController.DeleteFromCart(${index})">x</span>
+                         </div>
+                     </div>
+                  </div>
+             `);
+                })
+            }
+            
+
         }
        
     },
@@ -114,6 +144,17 @@ var ProductController = {
         }
         else {
             alert('Cart Empty');
+        }
+    },
+
+    LoadCartProductsForCheckout: () => {
+        if (localStorage.getItem("LstCartProducts") != null && localStorage.getItem("LstCartProducts") != undefined) {
+            LstCartProducts = JSON.parse(localStorage.getItem("LstCartProducts"));
+            $('#lblCartCnt').html(LstCartProducts.length);
+            ProductController.ArrangeProductsForCart();
+            
+
+
         }
     }
 

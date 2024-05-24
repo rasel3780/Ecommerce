@@ -7,15 +7,12 @@
 <script src="~/js/service/productservice.js"></script>
 
 <script>
-    var LstCartProducts = [];
+    
     $(document).ready(function () {
-        if (localStorage.getItem("LstCartProducts") != null && localStorage.getItem("LstCartProducts") != undefined) {
-            LstCartProducts = JSON.parse(localStorage.getItem("LstCartProducts"));
-            console.log(LstCartProducts);
-            $('#lblCartCnt').html(LstCartProducts.length);
-
-
-
-        }
+        ProductController.LoadCartProductsForCheckout();
     })
 </script>
+
+<div id="dvDetailsCartsProduct" style="width:100%">
+
+</div>
