@@ -56,6 +56,7 @@ var ProductController = {
         })
        
         LstCartProducts = LstCartProducts_upd;
+        localStorage.setItem("LstCartProducts", JSON.stringify(LstCartProducts));
         ProductController.ArrangeProductsForCart();
         alert("Cart updated");
     },
@@ -147,13 +148,11 @@ var ProductController = {
         }
     },
 
-    LoadCartProductsForCheckout: () => {
+    LoadCartCommon: () => {
         if (localStorage.getItem("LstCartProducts") != null && localStorage.getItem("LstCartProducts") != undefined) {
             LstCartProducts = JSON.parse(localStorage.getItem("LstCartProducts"));
             $('#lblCartCnt').html(LstCartProducts.length);
             ProductController.ArrangeProductsForCart();
-            
-
 
         }
     }
