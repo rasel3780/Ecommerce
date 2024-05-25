@@ -156,6 +156,13 @@ var ProductController = {
             ProductController.ArrangeProductsForCart();
 
         }
-    } 
+    },
+
+    SingleProduct: (ProductID) => {
+        ProductService.GetSingleProduct(ProductID, function () {
+
+
+        })
+    }
 
 }
