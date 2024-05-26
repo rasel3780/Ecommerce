@@ -17,12 +17,20 @@
 
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
 
+    <script src="~/js/controller/productcontroller.js"></script>
+    <script src="~/js/service/productservice.js"></script>
+
     <script>
         $(document).ready(function () {
             if (localStorage.getItem("userName") != undefined && localStorage.getItem("userName") != null) {
                 var userName = localStorage.getItem("userName");
                 $('#lblUser').html(userName);
             }
+        })
+        $(document).ready(function () { 
+            ProductController.LoadCartCommon();
+            ProductController.LoadProductCategory();
+        
         })
     </script>
 </head>
@@ -63,6 +71,7 @@
             </div>
         </nav>
     </header>
+    @Html.Partial("~/views/common/_partialSideBar.cshtml")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
