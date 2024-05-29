@@ -29,7 +29,7 @@
         })
         $(document).ready(function () { 
             ProductController.LoadCartCommon();
-            ProductController.LoadProductCategory();
+            ProductController.LoadProductCategory('@Url.Action("CategoryProduct", "Product")');
         
         })
     </script>

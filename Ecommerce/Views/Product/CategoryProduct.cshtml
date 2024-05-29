@@ -1,7 +1,19 @@
 ﻿
 @{
-    ViewData["Title"] = "CategoryProduct";
+    string CategoryName = Context.Request.Query["CategoryName"].ToString();
 }
 
-<h1>CategoryProduct</h1>
+<script>
+    var CategoryName = '@CategoryName';
+    $(document).ready(function () {
+        ProductController.LstCategoryProducts(CategoryName);
+    });
+</script>
+
+
+<div class="container">
+    <div class="row" id="productContainer">
+        <!-- Product cards will be inserted here -->
+    </div>
+</div>
 

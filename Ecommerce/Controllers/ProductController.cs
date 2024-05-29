@@ -26,6 +26,11 @@ namespace Ecommerce.Controllers
             return View();
         }
 
+        public IActionResult CategoryProduct()
+        {
+            
+            return View();
+        }
 
 
     }
