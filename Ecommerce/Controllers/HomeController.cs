@@ -15,6 +15,7 @@ namespace Ecommerce.Controllers
 
         public IActionResult Index()
         {
+            List<Account> lstAcc = Account.ListUsers();
             return View();
         }
 
@@ -28,5 +29,7 @@ namespace Ecommerce.Controllers
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
+
+
     }
 }
