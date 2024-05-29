@@ -1,17 +1,44 @@
 ﻿var LstCartProducts = [];
 var ProductController = {
 
-    LoadProductCategory: () => {
+    LoadProductCategory: (url) => {
         var LiCategories = "";
         ProductService.LoadCategories(function (response) {
 
             $.each(response, function (index, value) {
-                LiCategories = LiCategories+ `<li>${value.name}</li>`
+                LiCategories = LiCategories+ `<a href="${url}/${value}">${value.name}</a><br/>`
             })
             $('#ulMenu').html(LiCategories)
         })
 
         
+    },
+
+    LstCategoryProducts: (CategoryName) => {
+
+        ProductService.LoadProductByCategory(CategoryName, function (response) {
+            let productContent = '';
+            $.each(response.products, function (index, value) { 
+                productContent += `
+                    <div class="col-md-3 mb-4">
+                        <div class="card h-100">
+                            <img id='pdPicture_${value.id}' src="${value.thumbnail}" class="card-img-top" alt="${value.title}" onclick="window.location.href='/Product/SingleProduct/${value.id}'">
+                            <div class="card-body text-center">
+                                <h5 id='pdName_${value.id}' class="card-title" onclick="window.location.href='/Product/SingleProduct/${value.id}'">${value.title}
+                                </h5>
+                                <p id='pdPrice_${value.id}' class="card-text">Price: ${value.price}</p>
+                                <a id='btnPdAddToCart_${value.id}' class="btn btn-primary" onclick='ProductController.AddToCart(this)'>
+                                    <i class="fas fa-shopping-cart"></i> Add to Cart
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            })
+
+            $('#productContainer').html(productContent);
+        })
+
     },
 
     LstProducts: () => {
