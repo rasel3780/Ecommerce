@@ -7,6 +7,32 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Ecommerce.styles.css" asp-append-version="true" />
+
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          rel="stylesheet" />
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+
+    <script src="~/js/controller/productcontroller.js"></script>
+    <script src="~/js/service/productservice.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            if (localStorage.getItem("userName") != undefined && localStorage.getItem("userName") != null) {
+                var userName = localStorage.getItem("userName");
+                $('#lblUser').html(userName);
+            }
+        })
+        $(document).ready(function () { 
+            ProductController.LoadCartCommon();
+            ProductController.LoadProductCategory();
+        
+        })
+    </script>
 </head>
 <body>
     <header>
@@ -25,24 +51,40 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Product</a>
+                        </li>
                     </ul>
+                </div>
+                <div style="float:right; width:500px">
+                    <!--Cart-->
+                    <div onclick="ProductController.ViewCart()" style="cursor:pointer;width:10px; height:10px; display:inline-flex; padding:0px 7px; position:relative;">
+                        <i class="fa fa-cart-shopping"></i><span id="lblCartCnt" style="padding:2px 5px; color:white; background:maroon; font-size:10px; position:absolute; right:-11px; top:-10px;">0</span>
+                    </div>
+
+                    <!--User-->
+                    <div style="width:10px; height:10px; display:inline-flex; padding:0px 5px;">
+                        <i class="fa fa-user"></i> <span id="lblUser">User Name:</span>
+                    </div>
+                   
                 </div>
             </div>
         </nav>
     </header>
+    @Html.Partial("~/views/common/_partialSideBar.cshtml")
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
 
+    @Html.Partial("~/views/common/_partialcartview.cshtml")
     <footer class="border-top footer text-muted">
         <div class="container">
             &copy; 2024 - Ecommerce - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+ 
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
